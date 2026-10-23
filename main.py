@@ -114,7 +114,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD", "POST"])
 async def home():
     blocked, news = await is_news_blocked()
     return {"status": "online", "news_blocked": blocked, "time_paris": datetime.now(PARIS).isoformat()}
